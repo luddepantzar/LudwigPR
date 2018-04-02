@@ -1,0 +1,7 @@
+CREATE TABLE 'Employees' (
+	'EmployeeID' INT(11) NOT NULL AUTO_INCREMENT,
+	'First-name' VARCHAR(64) DEFAULT NULL,
+	'Last-name' VARCHAR(64) DEFAULT NULL,
+	'Email' VARCHAR(64) DEFAULT NULL,
+	PRIMARY KEY ('EmployeeID')
+);
