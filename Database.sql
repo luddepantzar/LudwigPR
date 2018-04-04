@@ -1,7 +1,58 @@
-CREATE TABLE 'Employees' (
+CREATE DATABASE LudwigPR;
+
+CREATE TABLE Employees (
 	'EmployeeID' INT(11) NOT NULL AUTO_INCREMENT,
 	'First-name' VARCHAR(64) DEFAULT NULL,
 	'Last-name' VARCHAR(64) DEFAULT NULL,
 	'Email' VARCHAR(64) DEFAULT NULL,
 	PRIMARY KEY ('EmployeeID')
+);
+
+CREATE TABLE Company (
+	'CompanyID' INT(11) NOT NULL AUTO_INCREMENT,
+	'Name' VARCHAR(64) NOT NULL,
+	PRIMARY KEY ('CompanyID')
+);
+
+CREATE TABLE Movies (
+	'MovieID' INT(11) NOT NULL AUTO_INCREMENT,
+	'Name' VARCHAR(64) DEFAULT NULL,
+	'Length' INT(11) NOT NULL,
+	'Director' VARCHAR(64) NOT NULL,
+	'Release_date' DATE NOT NULL,
+	PRIMARY KEY ('MovieID'),
+	FOREIGN KEY ('Company_CompanyID') REFERENCES Company(CompanyID),
+	FOREIGN KEY ('Genre_GenreID') REFERENCES Genre(GenreID)
+);
+
+CREATE TABLE Actors (
+	'ActorID' INT(11) NOT NULL AUTO_INCREMENT,
+	'First_name' VARCHAR(64) DEFAULT NULL,
+	'Last_name' VARCHAR(64) DEFAULT NULL,
+	PRIMARY KEY ('ActorID')
+);
+
+CREATE TABLE Customer (
+	'CustomerID' INT(11) NOT NULL AUTO_INCREMENT,
+	'First_name' VARCHAR(64) DEFAULT NULL,
+	'Last_name' VARCHAR(64) DEFAULT NULL,
+	'Phone_nr' INT(11) NOT NULL,
+	'Email' VARCHAR(64) NOT NULL,
+	PRIMARY KEY ('CustomerID')
+); 
+
+CREATE TABLE Genre (
+	'GenreID' INT(11) NOT NULL AUTO_INCREMENT,
+	'Name' VARCHAR(64) NOT NULL,
+	PRIMARY KEY ('GenreID'),
+	FOREIGN KEY (Movies_MovieID) REFERENCES Movies(MovieID)
+);
+
+CREATE TABLE Sales (
+	'SaleID' INT(11) NOT NULL AUTO_INCREMENT,
+	'sale_date' DATE NOT NULL,
+	PRIMARY KEY ('SaleID'),
+	FOREIGN KEY ('Customer_CustomerID') REFERENCES Customer(CustomerID),
+	FOREIGN KEY ('Employees_EmployeeID') REFERENCES Employee(EmployeeID),
+	FOREIGN KEY ('Movies_MovieID') REFERENCES Movies(MovieID)
 );
