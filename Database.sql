@@ -1,58 +1,75 @@
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS;
+SET FOREIGN_KEY_CHECKS=0;
+
 CREATE DATABASE LudwigPR;
 
+USE LudwigPR;
 CREATE TABLE Employees (
-	'EmployeeID' INT(11) NOT NULL AUTO_INCREMENT,
-	'First-name' VARCHAR(64) DEFAULT NULL,
-	'Last-name' VARCHAR(64) DEFAULT NULL,
-	'Email' VARCHAR(64) DEFAULT NULL,
-	PRIMARY KEY ('EmployeeID')
-);
+	`EmployeeID` INT(11) NOT NULL AUTO_INCREMENT,
+	`First-name` VARCHAR(64) DEFAULT NULL,
+	`Last-name` VARCHAR(64) DEFAULT NULL,
+	`Email` VARCHAR(64) DEFAULT NULL,
+	PRIMARY KEY (`EmployeeID`)
+)
+ENGINE = InnoDB;
 
 CREATE TABLE Company (
-	'CompanyID' INT(11) NOT NULL AUTO_INCREMENT,
-	'Name' VARCHAR(64) NOT NULL,
-	PRIMARY KEY ('CompanyID')
-);
-
-CREATE TABLE Movies (
-	'MovieID' INT(11) NOT NULL AUTO_INCREMENT,
-	'Name' VARCHAR(64) DEFAULT NULL,
-	'Length' INT(11) NOT NULL,
-	'Director' VARCHAR(64) NOT NULL,
-	'Release_date' DATE NOT NULL,
-	PRIMARY KEY ('MovieID'),
-	FOREIGN KEY ('Company_CompanyID') REFERENCES Company(CompanyID),
-	FOREIGN KEY ('Genre_GenreID') REFERENCES Genre(GenreID)
-);
+	`CompanyID` INT(11) NOT NULL AUTO_INCREMENT,
+	`Name` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (`CompanyID`)
+)
+ENGINE = InnoDB;
 
 CREATE TABLE Actors (
-	'ActorID' INT(11) NOT NULL AUTO_INCREMENT,
-	'First_name' VARCHAR(64) DEFAULT NULL,
-	'Last_name' VARCHAR(64) DEFAULT NULL,
-	PRIMARY KEY ('ActorID')
-);
+	`ActorID` INT(11) NOT NULL AUTO_INCREMENT,
+	`First_name` VARCHAR(64) DEFAULT NULL,
+	`Last_name` VARCHAR(64) DEFAULT NULL,
+	PRIMARY KEY (`ActorID`)
+)
+ENGINE = InnoDB;
 
 CREATE TABLE Customer (
-	'CustomerID' INT(11) NOT NULL AUTO_INCREMENT,
-	'First_name' VARCHAR(64) DEFAULT NULL,
-	'Last_name' VARCHAR(64) DEFAULT NULL,
-	'Phone_nr' INT(11) NOT NULL,
-	'Email' VARCHAR(64) NOT NULL,
-	PRIMARY KEY ('CustomerID')
-); 
+	`CustomerID` INT(11) NOT NULL AUTO_INCREMENT,
+	`First_name` VARCHAR(64) DEFAULT NULL,
+	`Last_name` VARCHAR(64) DEFAULT NULL,
+	`Phone_nr` INT(11) NOT NULL,
+	`Email` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (`CustomerID`)
+)
+ENGINE = InnoDB; 
+
+CREATE TABLE Movies (
+	`MovieID` INT(11) NOT NULL AUTO_INCREMENT,
+	`Name` VARCHAR(64) DEFAULT NULL,
+	`Length` INT(11) NOT NULL,
+	`Director` VARCHAR(64) NOT NULL,
+	`Release_date` DATE NOT NULL,
+    `Company_CompanyID` INT(11),
+    `Genre_GenreID` INT(11),
+	PRIMARY KEY (`MovieID`),
+	FOREIGN KEY (`Company_CompanyID`) REFERENCES `Company`(`CompanyID`) ON DELETE SET NULL,
+	FOREIGN KEY (`Genre_GenreID`) REFERENCES `Genre`(`GenreID`) ON DELETE SET NULL
+)
+ENGINE = InnoDB;
 
 CREATE TABLE Genre (
-	'GenreID' INT(11) NOT NULL AUTO_INCREMENT,
-	'Name' VARCHAR(64) NOT NULL,
-	PRIMARY KEY ('GenreID'),
-	FOREIGN KEY (Movies_MovieID) REFERENCES Movies(MovieID)
-);
+	`GenreID` INT(11) NOT NULL AUTO_INCREMENT,
+	`Name` VARCHAR(64) NOT NULL,
+    `Movies_MovieID` INT(11),
+	PRIMARY KEY (`GenreID`),
+	FOREIGN KEY (`Movies_MovieID`) REFERENCES `Movies`(`MovieID`)
+)
+ENGINE = InnoDB;
 
 CREATE TABLE Sales (
-	'SaleID' INT(11) NOT NULL AUTO_INCREMENT,
-	'sale_date' DATE NOT NULL,
-	PRIMARY KEY ('SaleID'),
-	FOREIGN KEY ('Customer_CustomerID') REFERENCES Customer(CustomerID),
-	FOREIGN KEY ('Employees_EmployeeID') REFERENCES Employee(EmployeeID),
-	FOREIGN KEY ('Movies_MovieID') REFERENCES Movies(MovieID)
-);
+	`SaleID` INT(11) NOT NULL AUTO_INCREMENT,
+	`sale_date` DATE NOT NULL,
+    `Customer_CustomerID` INT(11),
+    `Employees_EmployeeID` INT(11),
+    `Movies_MovieID` INT(11),
+	PRIMARY KEY (`SaleID`),
+	FOREIGN KEY (`Customer_CustomerID`) REFERENCES `Customer`(`CustomerID`),
+	FOREIGN KEY (`Employees_EmployeeID`) REFERENCES `Employee`(`EmployeeID`),
+	FOREIGN KEY (`Movies_MovieID`) REFERENCES `Movies`(`MovieID`)
+)
+ENGINE = InnoDB;
