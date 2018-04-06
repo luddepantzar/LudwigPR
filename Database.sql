@@ -270,7 +270,13 @@ INNER JOIN sales ON Customer.CustomerID = Sales.Customer_CustomerID
 INNER JOIN Movies ON Movies.MovieID = Sales.Movies_MovieID
 WHERE current_date() < Return_date;
 
-
+CREATE VIEW `5_EmployeesSellAmount` AS
+SELECT
+Employees.Name AS 'Name',
+Employees.Sales AS 'Sales'
+FROM Employees
+WHERE Sales > 0
+ORDER BY Sales;
 
 
 
