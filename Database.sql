@@ -181,6 +181,7 @@ SELECT
 Movies.MovieID AS 'Movie ID',
 Title AS 'Title', 
 Length AS 'Length',
+Genre.Name AS 'Genre',
 Director AS 'Director',
 Release_date AS 'Release date',
 Company.Name AS 'Production company',
@@ -188,11 +189,9 @@ Actors.Name AS 'Actor'
 FROM Movies
 INNER JOIN Actors ON Actors.actorID = Movies.Actors_ActorID /*Showing the Actors name instead of ID number.*/
 INNER JOIN Company ON Company.CompanyID = Movies.Company_CompanyID /*Showing the Companys name instead of ID number.*/
+INNER JOIN Genre ON Genre.GenreID = Movies.Genre_GenreID /*Showing the Companys name instead of ID number.*/
 WHERE MovieID < 50 
 ORDER BY (Length);
-
-
-
 
 
 
