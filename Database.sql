@@ -9,6 +9,7 @@ CREATE TABLE Employees (
 	`EmployeeID` INT(11) NOT NULL AUTO_INCREMENT,
 	`Name` VARCHAR(64) DEFAULT NULL,
 	`Email` VARCHAR(320) DEFAULT NULL,
+    `Sales` INT(11) DEFAULT NULL,
 	PRIMARY KEY (`EmployeeID`)
 )
 ENGINE = InnoDB;
@@ -194,16 +195,16 @@ INSERT INTO Customer VALUES
 
 SET AUTOCOMMIT=0;
 INSERT INTO Employees VALUES 
-(1,'Anthony Reacher', 'ant.reach@hotmail.com'),
-(2,'Rina Lakeswood', 'Riri@outlook.com'),
-(3,'Justin Barchia', 'bambam@gmail.com'),
-(4,'Blake Boogle', 'b.b@hotmail.com'),
-(5,'Adriana Villopoto', 'adi.vilo@hotmail.com'),
-(6,'Jessica Mullins', 'jessieM@outlook.com'),
-(7, 'Trisha Andersson', 'trish@gmail.com'),
-(8, 'Tyler Tyson', 'tyty@outlook.com'),
-(9, 'Chester Davalos', 'chest@gmail.com'),
-(10, 'Martinez Edoardo', 'mar.ed@hotmail.com');
+(1,'Anthony Reacher', 'ant.reach@hotmail.com', 2),
+(2,'Rina Lakeswood', 'Riri@outlook.com', 2),
+(3,'Justin Barchia', 'bambam@gmail.com', 1),
+(4,'Blake Boogle', 'b.b@hotmail.com', 1),
+(5,'Adriana Villopoto', 'adi.vilo@hotmail.com', 1),
+(6,'Jessica Mullins', 'jessieM@outlook.com', 1),
+(7, 'Trisha Andersson', 'trish@gmail.com', 2),
+(8, 'Tyler Tyson', 'tyty@outlook.com', 1),
+(9, 'Chester Davalos', 'chest@gmail.com', 3),
+(10, 'Martinez Edoardo', 'mar.ed@hotmail.com', 1);
 
 SET AUTOCOMMIT=0;
 INSERT INTO Sales VALUES
@@ -218,7 +219,7 @@ INSERT INTO Sales VALUES
 (9, '2015-10-01', '2015-10-03',10, 9, 6),
 (10, '2017-07-06', '2017-07-09',8, 5, 20),
 (11, '2014-04-06', '2014-04-10',2, 10, 13),
-(12, '2018-04-03', '2018-04-09',5, 4, 11),
+(12, '2018-04-03', '2018-04-09',5, 9, 11),
 (13, '2012-12-15', '2012-12-17',10, 9, 2),
 (14, '2013-10-26', '2013-10-27',9, 2, 4),
 (15, '2018-04-02', '2018-05-10',7, 7, 5);
@@ -268,6 +269,8 @@ FROM Customer
 INNER JOIN sales ON Customer.CustomerID = Sales.Customer_CustomerID
 INNER JOIN Movies ON Movies.MovieID = Sales.Movies_MovieID
 WHERE current_date() < Return_date;
+
+
 
 
 
