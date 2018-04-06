@@ -7,8 +7,7 @@ CREATE DATABASE LudwigPR;
 USE LudwigPR;
 CREATE TABLE Employees (
 	`EmployeeID` INT(11) NOT NULL AUTO_INCREMENT,
-	`First-name` VARCHAR(64) DEFAULT NULL,
-	`Last-name` VARCHAR(64) DEFAULT NULL,
+	`Name` VARCHAR(64) DEFAULT NULL,
 	`Email` VARCHAR(320) DEFAULT NULL,
 	PRIMARY KEY (`EmployeeID`)
 )
@@ -30,8 +29,7 @@ ENGINE = InnoDB;
 
 CREATE TABLE Customer (
 	`CustomerID` INT(11) NOT NULL AUTO_INCREMENT,
-	`First_name` VARCHAR(64) DEFAULT NULL,
-	`Last_name` VARCHAR(64) DEFAULT NULL,
+	`Name` VARCHAR(64) DEFAULT NULL,
 	`Phone_nr` INT(22) NOT NULL,
 	`Email` VARCHAR(320) NOT NULL,
 	PRIMARY KEY (`CustomerID`)
@@ -65,6 +63,7 @@ ENGINE = InnoDB;
 CREATE TABLE Sales (
 	`SaleID` INT(11) NOT NULL AUTO_INCREMENT,
 	`sale_date` DATE NOT NULL,
+    `return_date` DATE NOT NULL,
     `Customer_CustomerID` INT(11),
     `Employees_EmployeeID` INT(11),
     `Movies_MovieID` INT(11),
@@ -74,6 +73,54 @@ CREATE TABLE Sales (
 	FOREIGN KEY (`Movies_MovieID`) REFERENCES `Movies`(`MovieID`)
 )
 ENGINE = InnoDB;
+
+CREATE TABLE Inventory (
+	`InventoryID` INT(11) NOT NULL AUTO_INCREMENT,
+    `Amount` INT(11) NOT NULL,
+    `Movies_MovieID` INT(11),
+    `Store_StoreID` INT(11),
+    PRIMARY KEY (`InventoryID`),
+    FOREIGN KEY (`Movies_MovieID`) REFERENCES `Movies`(`MovieID`),
+    FOREIGN KEY (`Store_StoreID`) REFERENCES `Store`(`StoreID`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE Store (
+	`StoreID` INT(11) NOT NULL AUTO_INCREMENT,
+    `Country` VARCHAR(64),
+    `City` VARCHAR(64),
+    PRIMARY KEY (`StoreID`)
+)
+ENGINE = InnoDB;
+
+SET AUTOCOMMIT=0;
+INSERT INTO Inventory VALUES
+(1, 3, 1, 1),
+(2, 1, 2, 2),
+(3, 4, 3, 1),
+(4, 0, 4, 0),
+(5, 1, 5, 3),
+(6, 2, 6, 2),
+(7, 3, 7, 1),
+(8, 1, 8, 2),
+(9, 0, 9, 0),
+(10, 5, 10, 3),
+(11, 2, 11, 1),
+(12, 3, 12, 3),
+(13, 2, 13, 2),
+(14, 2, 14, 3),
+(15, 6, 15, 1),
+(16, 4, 16, 2),
+(17, 1, 17, 1),
+(18, 3, 18, 3),
+(19, 0, 19, 0),
+(20, 3, 20, 3);
+
+SET AUTOCOMMIT=0;
+INSERT INTO Store VALUES
+(1,'America', 'New York'),
+(2,'Sweden', 'Stockholm'),
+(3,'Germany', 'Berlin');
 
 SET AUTOCOMMIT=0;
 INSERT INTO Genre VALUES
@@ -134,47 +181,47 @@ INSERT INTO Company VALUES
 
 SET AUTOCOMMIT=0;
 INSERT INTO Customer VALUES
-(1,'Alex', 'Anderson', '9820526', 'example1@example1.com'),
-(2,'Ryan', 'Dungey', '1569713', 'example2@example2.com'),
-(3,'Aron', 'Plessinger', '1697584', 'sql@qsl.com'),
-(4,'Cindy', 'Crawford', '346985', 'workbench@benchwork.com'),
-(5,'Ronnie', 'Mac', '1679584', 'ronnie@hotmail.com'),
-(6,'Mac', 'Miller', '4521986', 'mac@miller@hotmail.com'),
-(7,'Jennie', 'Ryan', '1695698', 'jennie.ryan@gmail.com'),
-(8,'Jacob', 'Karlsson', '1668452', 'jacob@outlook.com'),
-(9,'Andrew', 'Carmichael', '1364976', 'and.car@outlook.com'),
-(10,'Mitchell', 'Oldenburg', '1697526', 'Olden@hotmail.com');
+(1,'Alex Anderson', '9820526', 'example1@example1.com'),
+(2,'RyanDungey', '1569713', 'example2@example2.com'),
+(3,'Aron Plessinger', '1697584', 'sql@qsl.com'),
+(4,'Cindy Crawford', '346985', 'workbench@benchwork.com'),
+(5,'Ronnie Mac', '1679584', 'ronnie@hotmail.com'),
+(6,'Mac Miller', '4521986', 'mac@miller@hotmail.com'),
+(7,'Jennie Ryan', '1695698', 'jennie.ryan@gmail.com'),
+(8,'Jacob Karlsson', '1668452', 'jacob@outlook.com'),
+(9,'Andrew Carmichael', '1364976', 'and.car@outlook.com'),
+(10,'Mitchell Oldenburg', '1697526', 'Olden@hotmail.com');
 
 SET AUTOCOMMIT=0;
 INSERT INTO Employees VALUES 
-(1,'Anthony', 'Reacher', 'ant.reach@hotmail.com'),
-(2,'Rina', 'Lakeswood', 'Riri@outlook.com'),
-(3,'Justin', 'Barchia', 'bambam@gmail.com'),
-(4,'Blake', 'Boogle', 'b.b@hotmail.com'),
-(5,'Adriana', 'Villopoto', 'adi.vilo@hotmail.com'),
-(6,'Jessica', 'Mullins', 'jessieM@outlook.com'),
-(7, 'Trisha', 'Andersson', 'trish@gmail.com'),
-(8, 'Tyler', 'Tyson', 'tyty@outlook.com'),
-(9, 'Chester', 'Davalos', 'chest@gmail.com'),
-(10, 'Martinez', 'Edoardo', 'mar.ed@hotmail.com');
+(1,'Anthony Reacher', 'ant.reach@hotmail.com'),
+(2,'Rina Lakeswood', 'Riri@outlook.com'),
+(3,'Justin Barchia', 'bambam@gmail.com'),
+(4,'Blake Boogle', 'b.b@hotmail.com'),
+(5,'Adriana Villopoto', 'adi.vilo@hotmail.com'),
+(6,'Jessica Mullins', 'jessieM@outlook.com'),
+(7, 'Trisha Andersson', 'trish@gmail.com'),
+(8, 'Tyler Tyson', 'tyty@outlook.com'),
+(9, 'Chester Davalos', 'chest@gmail.com'),
+(10, 'Martinez Edoardo', 'mar.ed@hotmail.com');
 
 SET AUTOCOMMIT=0;
 INSERT INTO Sales VALUES
-(1, '2012-06-20', 4, 1, 16),
-(2, '2017-11-14', 1, 2, 1),
-(3, '2013-12-06', 2, 6, 18),
-(4, '2015-10-05', 3, 7, 14),
-(5, '2010-03-07', 5, 3, 15),
-(6, '2010-07-09', 7, 8, 8),
-(7, '2017-04-24', 3, 1, 10),
-(8, '2016-09-14', 6, 4, 3),
-(9, '2015-10-01', 10, 9, 6),
-(10, '2017-07-06', 8, 5, 20),
-(11, '2014-04-06', 2, 10, 13),
-(12, '2018-06-03', 5, 4, 11),
-(13, '2012-12-15', 10, 9, 2),
-(14, '2013-10-26', 9, 2, 4),
-(15, '2018-12-18', 7, 7, 5);
+(1, '2018-04-04', '2018-04-09', 4, 1, 16),
+(2, '2017-11-14', '2017-11-15',1, 2, 1),
+(3, '2018-04-05', '2018-04-10',2, 6, 18),
+(4, '2015-10-05', '2015-10-08',3, 7, 14),
+(5, '2018-04-01', '2018-04-22',5, 3, 15),
+(6, '2018-03-28', '2018-04-07',7, 8, 8),
+(7, '2017-04-24', '2017-04-26',3, 1, 10),
+(8, '2016-09-14', '2016-09-16',6, 4, 3),
+(9, '2015-10-01', '2015-10-03',10, 9, 6),
+(10, '2017-07-06', '2017-07-09',8, 5, 20),
+(11, '2014-04-06', '2014-04-10',2, 10, 13),
+(12, '2018-04-03', '2018-04-09',5, 4, 11),
+(13, '2012-12-15', '2012-12-17',10, 9, 2),
+(14, '2013-10-26', '2013-10-27',9, 2, 4),
+(15, '2018-04-02', '2018-05-10',7, 7, 5);
 
 CREATE VIEW `1_MoviesInCompany` AS
 SELECT 
@@ -209,6 +256,10 @@ INNER JOIN Company ON Company.CompanyID = Movies.Company_CompanyID /*Showing the
 INNER JOIN Genre ON Genre.GenreID = Movies.Genre_GenreID /*Showing the Companys name instead of ID number.*/
 WHERE Genre_GenreID = 1
 ORDER BY (Release_date);
+
+
+
+
 
 
 
