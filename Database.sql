@@ -278,7 +278,9 @@ FROM Employees
 WHERE Sales > 0
 ORDER BY Sales;
 
-
-
-
-
+CREATE VIEW `3_MoviesNotInStock` AS
+SELECT
+Movies_MovieID AS 'Movie',
+Customer_CustomerID AS 'Buyer',
+Employees_EmployeeID AS 'Seller'
+FROM Sales;

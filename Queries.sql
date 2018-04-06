@@ -10,3 +10,6 @@ SELECT * FROM ludwigpr.moviesarerented;
 
 /*Femte Uppgiften*/
 SELECT * FROM ludwigpr.5_employeessellamount;
+
+/*Tredje Uppgiften*/
+SELECT * FROM ludwigpr.3_moviesnotinstock;
