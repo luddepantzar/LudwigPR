@@ -193,7 +193,7 @@ INNER JOIN Genre ON Genre.GenreID = Movies.Genre_GenreID /*Showing the Companys 
 WHERE MovieID < 50 
 ORDER BY (Length);
 
-CREATE VIEW `1_MoviesInGenre` AS
+CREATE VIEW `2_MoviesInGenre` AS
 SELECT
 Movies.MovieID AS 'Movie ID',
 Title AS 'Title',
@@ -209,7 +209,6 @@ INNER JOIN Company ON Company.CompanyID = Movies.Company_CompanyID /*Showing the
 INNER JOIN Genre ON Genre.GenreID = Movies.Genre_GenreID /*Showing the Companys name instead of ID number.*/
 WHERE Genre_GenreID = 1
 ORDER BY (Release_date);
-
 
 
 
