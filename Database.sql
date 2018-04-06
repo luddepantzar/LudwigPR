@@ -176,4 +176,24 @@ INSERT INTO Sales VALUES
 (14, '2013-10-26', 9, 2, 4),
 (15, '2018-12-18', 7, 7, 5);
 
+CREATE VIEW `1_MoviesInCompany` AS
+SELECT 
+Movies.MovieID AS 'Movie ID',
+Title AS 'Title', 
+Length AS 'Length',
+Director AS 'Director',
+Release_date AS 'Release date',
+Company.Name AS 'Production company',
+Actors.Name AS 'Actor'
+FROM Movies
+INNER JOIN Actors ON Actors.actorID = Movies.Actors_ActorID /*Showing the Actors name instead of ID number.*/
+INNER JOIN Company ON Company.CompanyID = Movies.Company_CompanyID /*Showing the Companys name instead of ID number.*/
+WHERE MovieID < 50 
+ORDER BY (Length);
+
+
+
+
+
+
 
