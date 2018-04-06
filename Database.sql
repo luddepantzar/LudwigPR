@@ -284,3 +284,13 @@ Movies_MovieID AS 'Movie',
 Customer_CustomerID AS 'Buyer',
 Employees_EmployeeID AS 'Seller'
 FROM Sales;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `7_SetMovieToRented`(IN S_movie INT, OUT S_Count INT)
+BEGIN
+
+SELECT `Amount`, `Store_StoreID` FROM Inventory; 
+UPDATE Inventory 
+SET `Amount` = 0;
+END$$
+DELIMITER ;

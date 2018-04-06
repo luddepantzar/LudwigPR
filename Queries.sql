@@ -13,3 +13,7 @@ SELECT * FROM ludwigpr.5_employeessellamount;
 
 /*Tredje Uppgiften*/
 SELECT * FROM ludwigpr.3_moviesnotinstock;
+
+/*Sjunde Uppgiften*/
+EXEC ludwigpr.ludwigpr.7_SetMovieToRented;  
+GO  
