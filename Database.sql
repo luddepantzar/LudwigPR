@@ -266,7 +266,7 @@ title AS 'Title',
 Sale_date AS 'Date of sale',
 Return_date as 'Date of return'
 FROM Customer
-INNER JOIN sales ON Customer.CustomerID = Sales.Customer_CustomerID
+INNER JOIN Sales ON Customer.CustomerID = Sales.Customer_CustomerID
 INNER JOIN Movies ON Movies.MovieID = Sales.Movies_MovieID
 WHERE current_date() < Return_date;
 
